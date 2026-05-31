@@ -1,0 +1,182 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  background-color: #011F3F;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1.5rem 1rem 3rem;
+  user-select: none;
+}
+
+#level-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: clamp(1.25rem, 4vw, 3rem);
+  margin: 2rem auto 1rem;
+  color: #FEF2BF;
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+.key-hint {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  margin: 0 0.2em;
+  border: 3px solid #0a0a0a;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fef2bf 0%, #d4c070 100%);
+  color: #011F3F;
+  font-size: 0.82em;
+  vertical-align: middle;
+  line-height: 1.1;
+  box-shadow: 0 5px 0 #0a0a0a, 0 8px 16px rgba(0, 0, 0, 0.35);
+  animation: key-pulse 1.6s ease-in-out infinite;
+}
+
+#level-title.game-over-text .key-hint {
+  background: linear-gradient(180deg, #ffe8e8 0%, #ff9999 100%);
+  color: #5c1010;
+}
+
+@keyframes key-pulse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.instructions {
+  font-family: 'Press Start 2P', cursive;
+  font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+  color: rgba(254, 242, 191, 0.65);
+  margin: 0 auto 2rem;
+  line-height: 1.8;
+}
+
+.container {
+  display: inline-block;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(0.75rem, 3vw, 1.5rem);
+  margin-bottom: clamp(0.75rem, 3vw, 1.5rem);
+}
+
+.btn {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  height: clamp(120px, 28vw, 200px);
+  width: clamp(120px, 28vw, 200px);
+  border: 8px solid #0a0a0a;
+  border-radius: 20%;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:hover:not(:active) {
+  filter: brightness(1.12);
+  transform: scale(1.02);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.red {
+  background-color: #e84118;
+  box-shadow: 0 8px 0 #922b0f, 0 12px 20px rgba(0, 0, 0, 0.35);
+}
+
+.green {
+  background-color: #44bd32;
+  box-shadow: 0 8px 0 #1e6b12, 0 12px 20px rgba(0, 0, 0, 0.35);
+}
+
+.blue {
+  background-color: #0097e6;
+  box-shadow: 0 8px 0 #005a8a, 0 12px 20px rgba(0, 0, 0, 0.35);
+}
+
+.yellow {
+  background-color: #fbc531;
+  box-shadow: 0 8px 0 #b8860b, 0 12px 20px rgba(0, 0, 0, 0.35);
+}
+
+.pressed {
+  box-shadow: 0 2px 0 #0a0a0a, inset 0 0 24px rgba(255, 255, 255, 0.55);
+  filter: brightness(1.35);
+  transform: scale(0.97);
+}
+
+.pressed.red {
+  background-color: #ff6b4a;
+}
+
+.pressed.green {
+  background-color: #7bed68;
+}
+
+.pressed.blue {
+  background-color: #48dbfb;
+}
+
+.pressed.yellow {
+  background-color: #ffe066;
+}
+
+@keyframes wrong-flash {
+  0%, 100% {
+    background-color: #011F3F;
+  }
+  50% {
+    background-color: #c0392b;
+  }
+}
+
+body.wrong-flash {
+  animation: wrong-flash 0.4s ease;
+}
+
+#level-title.game-over-text {
+  color: #ff6b6b;
+  animation: pulse-title 0.6s ease;
+}
+
+@keyframes pulse-title {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 1rem;
+  }
+
+  .instructions {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    border-width: 6px;
+  }
+}
