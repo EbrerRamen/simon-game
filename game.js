@@ -8,13 +8,37 @@ var nextSequenceTimeout;
 
 $(document).on("keydown", function (event) {
     if (!gameStart && (event.key === "a" || event.key === "A")) {
-        if (document.activeElement) {
-            document.activeElement.blur();
-        }
-        gameStart = true;
-        nextSequence();
+        startGame();
     }
 });
+
+$("#start-btn").on("click", function () {
+    startGame();
+});
+
+function startGame() {
+    if (gameStart) {
+        return;
+    }
+    if (document.activeElement) {
+        document.activeElement.blur();
+    }
+    gameStart = true;
+    $("#start-btn").addClass("hidden");
+    nextSequence();
+}
+
+function showStartButton(label) {
+    $("#start-btn").text(label).removeClass("hidden");
+}
+
+function setGameOverTitle() {
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        $("h1").html('Game Over, Press <span class="key-hint">A</span> to Restart');
+    } else {
+        $("h1").text("Game Over");
+    }
+}
 
 function nextSequence() {
     currentIndex = 0;
@@ -70,7 +94,9 @@ function animatePress(button) {
 
 function wrongColor() {
     clearTimeout(nextSequenceTimeout);
-    $("h1").html('Game Over, Press <span class="key-hint">A</span> to Restart').addClass("game-over-text");
+    setGameOverTitle();
+    $("h1").addClass("game-over-text");
+    showStartButton("Play Again");
     var audio = new Audio('./sounds/wrong.mp3');
     audio.play().catch(function () {});
     $("body").addClass("wrong-flash");
